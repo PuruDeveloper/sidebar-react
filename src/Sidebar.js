@@ -10,7 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 
 
-import { menu } from "./menu";
+import { menu, closedMenu } from "./menu";
 import { hasChildren } from "./utils";
 
 export default function Sidebar() {
@@ -29,11 +29,27 @@ export default function Sidebar() {
         </div>
     </div> : <div className="sidebar-closed">
     <div className="sidebar-header" onClick={(e) => setOpen(!open)}>
-            O
+            <h2>E</h2>   
         </div>
+        {
+            closedMenu.map((item, key) => <ClosedMenuItem key={key} item={item} />)
+        }
     </div>
   );
 }
+
+const ClosedMenuItem = ({ item }) => {
+  const Component = hasChildren(item) ? ClosedSingleLevel : ClosedSingleLevel;
+  return <Component item={item} />;
+};
+
+const ClosedSingleLevel = ({ item }) => {
+  return (
+    <ListItem button onClick={e => onButtonClick(e, item.to)}>
+      {item.icon ? <ListItemIcon>{item.icon}</ListItemIcon> : ""}
+    </ListItem>
+  );
+};
 
 const MenuItem = ({ item }) => {
   const Component = hasChildren(item) ? MultiLevel : SingleLevel;
@@ -64,7 +80,7 @@ const MultiLevel = ({ item }) => {
   return (
     <React.Fragment>
       <ListItem button onClick={handleClick}>
-        <ListItemIcon>{item.icon}</ListItemIcon>
+      {item.icon ? <ListItemIcon>{item.icon}</ListItemIcon> : ""}
         <ListItemText primary={item.title} />
         {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
       </ListItem>
