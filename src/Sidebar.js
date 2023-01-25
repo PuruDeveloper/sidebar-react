@@ -14,7 +14,14 @@ import { menu, closedMenu } from "./menu";
 import { hasChildren } from "./utils";
 
 export default function Sidebar() {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState( () => {
+      if(window.innerWidth > 1200) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    );
   return (
     open ? <div className="sidebar-open">
         <div className="sidebar-header">

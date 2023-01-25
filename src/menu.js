@@ -4,9 +4,10 @@ import TrendingUpOutlinedIcon from "@material-ui/icons/TrendingUpOutlined";
 import DescriptionOutlinedIcon from "@material-ui/icons/DescriptionOutlined";
 import React from "react";
 
+//Open view
 export const menu = [
   {
-    icon: "",
+    icon: <HomeOutlinedIcon />,
     title: "Home",
     to: "/home",
   },
@@ -76,6 +77,8 @@ export const menu = [
 ];
 
 
+
+//Closed view
 export const closedMenu = [
   {
     icon: <HomeOutlinedIcon />,
